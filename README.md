@@ -32,13 +32,9 @@ Project ini dibuat sebagai tugas Uprak untuk Pak Dwi dengan tujuan membantu pros
 
 ## 🧠 Database Design
 
-Table yang digunakan:
+Database Relasi screenshot:
 
-- users
-- transaksi
-- detail_transaksi
-- menu_produk
-- kategori
+![DataBase](assets/Database.png)
 
 ---
 
