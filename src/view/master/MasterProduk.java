@@ -8,6 +8,7 @@ import service.ServiceProduk;
 import dao.DAOProduk;
 import tabelmodel.TableModProduk;
 import model.ModelProduk;
+import model.ModelKategory;
 import java.util.List;
 import javax.swing.JOptionPane;
 import view.datatabel.DataKategory;
@@ -24,7 +25,7 @@ public class MasterProduk extends javax.swing.JPanel {
     public MasterProduk() {
         initComponents();
         tblProduk.setModel(tblModel);
-        inputId.setVisible(false);
+        inputId.setVisible(true);
         loadData();
     }
 
@@ -199,7 +200,7 @@ public class MasterProduk extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel8.setText("Status");
 
-        cmStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "- Status -", "tersedia", "habis", "nonaktif", "draft", " " }));
+        cmStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "== Pilih Status ==", "tersedia", "habis", "nonaktif", "draft", " " }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -372,7 +373,7 @@ public class MasterProduk extends javax.swing.JPanel {
         boolean closAble = true;
         DataKategory DKY = new DataKategory(null, closAble);
         DKY.setVisible(true);
-        
+
         inputidKategori.setText(DKY.moka.getId());
         inputNamaKategori.setText(DKY.moka.getNamakategori());
         inputNamaMenu.requestFocus();
@@ -420,16 +421,25 @@ public class MasterProduk extends javax.swing.JPanel {
     private void simpanData() {
         if (validasiInput() == true) {
             String jenisKategori = inputidKategori.getText();
+            String jenisKategoriNama = inputNamaKategori.getText();
 
-            String namaProduk = inputidKategori.getText();
-            String namaMenu = inputidKategori.getText();
-            String namaHarga = inputidKategori.getText();
-            String namaStok = inputidKategori.getText();
-            String namaStatus = inputidKategori.getText();
+            String namaMenu = inputNamaMenu.getText();
+            Long namaHarga = Long.parseLong(inputHarga.getText());
+            int namaStok = Integer.parseInt(inputStok.getText());
+            String namaStatus = cmStatus.getSelectedItem().toString();
 
             ModelProduk mopa = new ModelProduk();
+            ModelKategory moka = new ModelKategory();
 
-            mopa.setNamakategori(namaKetegoriS);
+            moka.setId(jenisKategori);
+            moka.setNamakategori(jenisKategoriNama);
+            mopa.setNamaMenu(namaMenu);
+            mopa.setHarga(namaHarga);
+            mopa.setStok(namaStok);
+            mopa.setStatus(namaStatus);
+
+            mopa.setIdKategori(moka);
+
             servis.addData(mopa);
             tblModel.addData(mopa);
             loadData();
@@ -445,15 +455,30 @@ public class MasterProduk extends javax.swing.JPanel {
             ModelProduk mopa = tblModel.getData(tblProduk.convertRowIndexToModel(index));
 
             if (validasiInput() == true) {
-                String idKategoris = inputId.getText();
-                String namaKetegoriS = inputidKategori.getText();
+                String jenisKategori = inputidKategori.getText();
+                String jenisKategoriNama = inputNamaKategori.getText();
 
-                ModelProduk kategori = new ModelProduk();
+                String namaMenu = inputNamaMenu.getText();
+                Long namaHarga = Long.parseLong(inputHarga.getText());
+                int namaStok = Integer.parseInt(inputStok.getText());
+                String namaStatus = cmStatus.getSelectedItem().toString();
+                String idMenu = inputId.getText();
 
-                kategori.setNamakategori(namaKetegoriS);
-                kategori.setId(idKategoris);
-                servis.UpdateData(kategori);
-                tblModel.UpdateData(index, kategori);
+                ModelProduk mopa1 = new ModelProduk();
+                ModelKategory moka = new ModelKategory();
+
+                moka.setId(jenisKategori);
+                moka.setNamakategori(jenisKategoriNama);
+
+                mopa1.setId(idMenu);
+                mopa1.setIdKategori(moka);
+                mopa1.setNamaMenu(namaMenu);
+                mopa1.setHarga(namaHarga);
+                mopa1.setStok(namaStok);
+                mopa1.setStatus(namaStatus);
+
+                servis.UpdateData(mopa1);
+                tblModel.UpdateData(index, mopa1);
                 loadData();
                 resetForm();
                 tampilPanel();
@@ -465,7 +490,21 @@ public class MasterProduk extends javax.swing.JPanel {
     private boolean validasiInput() {
         boolean valid = false;
         if (inputidKategori.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "ID kategori tidak boleh kosong");
+
+        } else if (inputNamaKategori.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nama kategori tidak boleh kosong");
+
+        } else if (inputNamaMenu.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nama menu tidak boleh kosong");
+
+        } else if (inputHarga.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Harga tidak boleh kosong");
+
+        } else if (inputStok.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Stok tidak boleh kosong");
+        } else if (cmStatus.getSelectedItem().equals("== Pilih Status ==")) {
+            JOptionPane.showMessageDialog(null, "Status harus dipilih");
         } else {
             valid = true;
         }
@@ -475,7 +514,14 @@ public class MasterProduk extends javax.swing.JPanel {
     private void resetForm() {
         addBtn.requestFocus();
         addBtn.setText("TAMBAH");
+        inputId.setText("");
         inputidKategori.setText("");
+        inputNamaKategori.setText("");
+        inputNamaMenu.setText("");
+        inputHarga.setText("");
+        inputStok.setText("");
+
+        cmStatus.setSelectedIndex(0);
     }
 
     private void tampilPanel() {
@@ -494,10 +540,11 @@ public class MasterProduk extends javax.swing.JPanel {
 
         inputId.setText(tblProduk.getModel().getValueAt(row, 1).toString());
         inputidKategori.setText(tblProduk.getModel().getValueAt(row, 2).toString());
-        inputidKategori.setText(tblProduk.getModel().getValueAt(row, 3).toString());
-        inputidKategori.setText(tblProduk.getModel().getValueAt(row, 4).toString());
-        inputidKategori.setText(tblProduk.getModel().getValueAt(row, 5).toString());
-        inputidKategori.setText(tblProduk.getModel().getValueAt(row, 6).toString());
+        inputNamaKategori.setText(tblProduk.getModel().getValueAt(row, 3).toString());
+        inputNamaMenu.setText(tblProduk.getModel().getValueAt(row, 4).toString());
+        inputHarga.setText(tblProduk.getModel().getValueAt(row, 5).toString());
+        inputStok.setText(tblProduk.getModel().getValueAt(row, 6).toString());
+        cmStatus.setSelectedItem(tblProduk.getModel().getValueAt(row, 7).toString());
         aktif();
         saveBtn.setText("PERBARUI");
         cancelBtn.setVisible(true);

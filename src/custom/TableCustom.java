@@ -2,11 +2,12 @@ package custom;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import model.ModelKategory;
+
+import custom.CellStatus;
+import custom.StatusType;
 
 public class TableCustom extends JTable {
 
@@ -32,7 +33,7 @@ public class TableCustom extends JTable {
 
                 TableHeader header = new TableHeader(value + "");
 
-                if (column == 4) {
+                if (column == 8) {
                     header.setHorizontalAlignment(CENTER);
                 }
 
@@ -44,44 +45,35 @@ public class TableCustom extends JTable {
         setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
             @Override
-            public Component getTableCellRendererComponent(
-                    JTable table,
-                    Object value,
-                    boolean selected,
-                    boolean hasFocus,
-                    int row,
-                    int column) {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
-                if (column != 4) {
-
-                    Component com = super.getTableCellRendererComponent(
+                if (column != 8) {
+                    // Kolom biasa
+                    Component component = super.getTableCellRendererComponent(
                             table,
                             value,
-                            selected,
+                            isSelected,
                             hasFocus,
                             row,
                             column
                     );
 
-                    com.setBackground(Color.WHITE);
+                    component.setBackground(Color.WHITE);
 
                     setBorder(noFocusBorder);
 
-                    if (selected) {
-                        com.setForeground(new Color(15, 89, 140));
+                    if (isSelected) {
+                        component.setForeground(new Color(15, 89, 140));
                     } else {
-                        com.setForeground(new Color(102, 102, 102));
+                        component.setForeground(new Color(102, 102, 102));
                     }
-
-                    return com;
-
-                } else {
-
-                    StatusType type = (StatusType) value;
+                    return component;
+                }else{
+                    StatusType type = StatusType.valueOf(value.toString());;
                     CellStatus cell = new CellStatus(type);
-
                     return cell;
                 }
+
             }
         });
     }
@@ -91,6 +83,4 @@ public class TableCustom extends JTable {
         DefaultTableModel model = (DefaultTableModel) getModel();
         model.addRow(row);
     }
-
-
 }

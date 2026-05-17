@@ -2,5 +2,6 @@ package custom;
 
 public enum StatusType {
     ACTIVE,
-    INACTIVE
+    INACTIVE,
+    PENDING
 }
