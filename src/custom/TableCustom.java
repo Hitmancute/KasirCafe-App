@@ -33,7 +33,7 @@ public class TableCustom extends JTable {
 
                 TableHeader header = new TableHeader(value + "");
 
-                if (column == 8) {
+                if (column == 15) {
                     header.setHorizontalAlignment(CENTER);
                 }
 
@@ -47,7 +47,7 @@ public class TableCustom extends JTable {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
-                if (column != 8) {
+                if (column != 15) {
                     // Kolom biasa
                     Component component = super.getTableCellRendererComponent(
                             table,

@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import view.master.MasterKategory;
 import view.master.MasterPelangga;
 import view.master.MasterProduk;
+import view.master.Transaksi;
 
 /**
  *
@@ -40,6 +41,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private void initComponents() {
 
         pnNavbar = new javax.swing.JPanel();
+        lbId = new javax.swing.JLabel();
         pnSideBar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnMenu = new javax.swing.JPanel();
@@ -60,11 +62,15 @@ public class MenuUtama extends javax.swing.JFrame {
         pnNavbar.setLayout(pnNavbarLayout);
         pnNavbarLayout.setHorizontalGroup(
             pnNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 777, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnNavbarLayout.createSequentialGroup()
+                .addGap(0, 697, Short.MAX_VALUE)
+                .addComponent(lbId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnNavbarLayout.setVerticalGroup(
             pnNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(pnNavbarLayout.createSequentialGroup()
+                .addComponent(lbId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 66, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnNavbar, java.awt.BorderLayout.PAGE_START);
@@ -157,6 +163,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbId;
     private javax.swing.JPanel pnContent;
     private javax.swing.JPanel pnMenu;
     private javax.swing.JPanel pnNavbar;
@@ -202,7 +209,16 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnUtama.revalidate();
             }
         });
-        MenuItem transaksi = new MenuItem(null, true, iconTransaksi, "Transaksi", null);
+        MenuItem transaksi = new MenuItem(null, true, iconTransaksi, "Transaksi", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnUtama.removeAll();
+                String id = lbId.getText();
+                pnUtama.add(new Transaksi(id));
+                pnUtama.repaint();
+                pnUtama.revalidate();
+            }
+        });
         MenuItem transaksiDetail = new MenuItem(null, true, iconTransaksiDetail, "Transaksi Detail", null);
 
         //List menu        

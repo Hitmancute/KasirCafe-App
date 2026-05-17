@@ -63,7 +63,7 @@ public class TableModTransaksi extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 9;
+        return 7;
     }
 
     @Override
@@ -76,16 +76,12 @@ public class TableModTransaksi extends AbstractTableModel {
             case 2:
                 return list.get(rowIndex).getIdPelanggan().getId();
             case 3:
-                return list.get(rowIndex).getIdKasir().getNama();
-            case 4:
-                return list.get(rowIndex).getIdPelanggan().getNama();
-            case 5:
                 return list.get(rowIndex).getTanggal();
-            case 6:
+            case 4:
                 return list.get(rowIndex).getTotalHarga();
-            case 7:
+            case 5:
                 return list.get(rowIndex).getBayar();
-            case 8:
+            case 6:
                 return list.get(rowIndex).getKembalian();
             default:
                 return null;
@@ -102,16 +98,12 @@ public class TableModTransaksi extends AbstractTableModel {
             case 2:
                 return "id_pelanggan";
             case 3:
-                return "nama";
-            case 4:
-                return "nama";
-            case 5:
                 return "tanggal";
-            case 6:
+            case 4:
                 return "total_harga";
-            case 7:
+            case 5:
                 return "bayar";
-            case 8:
+            case 6:
                 return "kembalian";
             default:
                 return null;

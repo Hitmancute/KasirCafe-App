@@ -13,6 +13,8 @@ import model.ModelDetailTransaksi;
  */
 public interface ServiceDetailTransaksi {
 
+    void sumTotal(ModelDetailTransaksi motdet);
+    
     void addData(ModelDetailTransaksi motdet);
 
     void UpdateData(ModelDetailTransaksi motdet);
@@ -21,7 +23,7 @@ public interface ServiceDetailTransaksi {
 
     ModelDetailTransaksi getById(String id);
 
-    List<ModelDetailTransaksi> getData();
+    List<ModelDetailTransaksi> getData(String id);
 
     List<ModelDetailTransaksi> getData2();
 
