@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import view.master.MasterKategory;
+import view.master.MasterPelangga;
 import view.master.MasterProduk;
 
 /**
@@ -172,6 +173,7 @@ public class MenuUtama extends javax.swing.JFrame {
         ImageIcon iconProduct = new ImageIcon(getClass().getResource("/img/icons8-product-20.png"));
         ImageIcon iconCategory = new ImageIcon(getClass().getResource("/img/icons8-category-20.png"));
         ImageIcon iconHome = new ImageIcon(getClass().getResource("/img/icons8-home-20.png"));
+        ImageIcon iconUser = new ImageIcon(getClass().getResource("/img/icons8-user-20.png"));
 
         MenuItem product = new MenuItem(null, true, iconProduct, "Product", new ActionListener() {
             @Override
@@ -191,6 +193,15 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnUtama.revalidate();
             }
         });
+        MenuItem pelanggan = new MenuItem(null, true, iconUser, "Pelanggan", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnUtama.removeAll();
+                pnUtama.add(new MasterPelangga());
+                pnUtama.repaint();
+                pnUtama.revalidate();
+            }
+        });
         MenuItem transaksi = new MenuItem(null, true, iconTransaksi, "Transaksi", null);
         MenuItem transaksiDetail = new MenuItem(null, true, iconTransaksiDetail, "Transaksi Detail", null);
 
@@ -204,7 +215,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 pnUtama.revalidate();
             }
         });
-        MenuItem menuMaster = new MenuItem(iconMaster, false, null, "Master", null, product, category);
+        MenuItem menuMaster = new MenuItem(iconMaster, false, null, "Master", null, product, category, pelanggan);
         MenuItem menuTransaksi = new MenuItem(iconSecond, false, null, "Transaksi", null, transaksi, transaksiDetail);
 
         addMenu(menuHome, menuMaster, menuTransaksi);

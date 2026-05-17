@@ -61,36 +61,37 @@ public class TableModPelanggan extends AbstractTableModel {
         return list.size();
     }
 
+    private final String[] columNames = {"No", "ID Pelanggan", "Nomer Telepon"};
+
     @Override
     public int getColumnCount() {
-        return 3;
+        return columNames.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        switch (columnIndex) {
-            case 0:
-                return list.get(rowIndex).getId();
-            case 1:
-                return list.get(rowIndex).getNama();
-            case 2:
-                return list.get(rowIndex).getNoHp();
-            default:
-                return null;
+        if (columnIndex == 0) {
+            return "   " + (rowIndex + 1);
+        } else {
+            switch (columnIndex - 1) {
+                case 0:
+                    return list.get(rowIndex).getId();
+                case 1:
+                    return list.get(rowIndex).getNama();
+                case 2:
+                    return list.get(rowIndex).getNoHp();
+                default:
+                    return null;
+            }
         }
     }
 
     @Override
     public String getColumnName(int column) {
-        switch (column) {
-            case 0:
-                return "id";
-            case 1:
-                return "nama";
-            case 2:
-                return "no_hp";
-            default:
-                return null;
+        if (column == 0) {
+            return "   " + columNames[column];
+        } else {
+            return columNames[column];
         }
     }
 }

@@ -25,7 +25,7 @@ public class MasterProduk extends javax.swing.JPanel {
     public MasterProduk() {
         initComponents();
         tblProduk.setModel(tblModel);
-        inputId.setVisible(true);
+        inputId.setVisible(false);
         loadData();
     }
 
