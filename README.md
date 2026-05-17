@@ -80,7 +80,8 @@ src/
 
 Tambahkan screenshot aplikasi di sini.
 
-![Dashboard](https://github.com/Hitmancute/KasirCafe-App/blob/main/assets/dashboard.png?raw=true)
+![Login](assets/login.png)
+![Dashboard](assets/dashboard.png)
 ```md
 ![Transaksi](assets/transaksi.png)
 ```
