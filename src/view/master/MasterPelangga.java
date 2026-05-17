@@ -404,7 +404,7 @@ public class MasterPelangga extends javax.swing.JPanel {
         tambahPelanggan.setVisible(true);
 
         int row = tblPelanggan.getSelectedRow();
-        jLabel2.setText("Perbaruhi Data Kategori");
+        jLabel2.setText("Perbaruhi Data Pelanggan");
 
         inputId.setText(tblPelanggan.getModel().getValueAt(row, 1).toString());
         inputNama.setText(tblPelanggan.getModel().getValueAt(row, 2).toString());

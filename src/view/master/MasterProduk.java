@@ -536,7 +536,7 @@ public class MasterProduk extends javax.swing.JPanel {
         tambahKategory.setVisible(true);
 
         int row = tblProduk.getSelectedRow();
-        jLabel2.setText("Perbaruhi Data Kategori");
+        jLabel2.setText("Perbaruhi Data Produk");
 
         inputId.setText(tblProduk.getModel().getValueAt(row, 1).toString());
         inputidKategori.setText(tblProduk.getModel().getValueAt(row, 2).toString());
