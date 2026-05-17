@@ -61,9 +61,10 @@ public class TableModDetailTransaksi extends AbstractTableModel {
         return list.size();
     }
 
+    private final String[] columnNames = {"ID Transaksi Detail","ID Transaksi","ID Menu","Menu","Harga","Jumlah","Subtotal"};
     @Override
     public int getColumnCount() {
-        return 5;
+        return columnNames.length;
     }
 
     @Override
@@ -76,8 +77,12 @@ public class TableModDetailTransaksi extends AbstractTableModel {
             case 2:
                 return list.get(rowIndex).getIdProduk().getId();
             case 3:
-                return list.get(rowIndex).getJumlah();
+                return list.get(rowIndex).getIdProduk().getNamaMenu();
             case 4:
+                return list.get(rowIndex).getIdProduk().getHarga();
+            case 5:
+                return list.get(rowIndex).getJumlah();
+            case 6:
                 return list.get(rowIndex).getSubtotal();
             default:
                 return null;
@@ -86,19 +91,6 @@ public class TableModDetailTransaksi extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        switch (column) {
-            case 0:
-                return "id";
-            case 1:
-                return "id_transaksi";
-            case 2:
-                return "id_menu";
-            case 3:
-                return "jumlah";
-            case 4:
-                return "subtotal";
-            default:
-                return null;
-        }
+        return columnNames[column];
     }
 }

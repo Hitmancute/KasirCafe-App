@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -60,7 +62,7 @@ public class DAOLogin implements ServiceLogin {
                 lg.tutup = true;
 
             } else {
-                JOptionPane.showMessageDialog(null, "Username dan Password salah", "Login Gagal",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Username dan Password salah", "Login Gagal", JOptionPane.ERROR_MESSAGE);
                 FormLogin lg = new FormLogin();
                 lg.tutup = false;
             }
@@ -68,5 +70,42 @@ public class DAOLogin implements ServiceLogin {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error : " + ex.getMessage());
         }
+    }
+
+    @Override
+    public List<ModelLogin> search(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ModelLogin> getData() {
+        List<ModelLogin> users = new ArrayList<>();
+
+        String sql = """
+        SELECT id, nama,username,role
+        FROM kasir
+        ORDER BY nama ASC
+        """;
+
+        try (
+                PreparedStatement st = conn.prepareStatement(sql); ResultSet rs = st.executeQuery()) {
+
+            while (rs.next()) {
+
+                ModelLogin user = new ModelLogin();
+
+                user.setId(rs.getString("id"));
+                user.setNama(rs.getString("nama"));
+                user.setUsername(rs.getString("username"));
+                user.setRole(rs.getString("role"));
+
+                users.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 }

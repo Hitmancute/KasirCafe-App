@@ -56,12 +56,6 @@ public class DAOProduk implements ServiceProduk {
             st.setLong(3, mopa.getHarga());
             st.setInt(4, mopa.getStok());
             st.setString(5, mopa.getStatus());
-//            System.out.println("ID UPDATE = " + mopa.getIdKategori().getId());
-//            System.out.println("ID UPDATE = " + mopa.getNamaMenu());
-//            System.out.println("ID UPDATE = " + mopa.getHarga());
-//            System.out.println("ID UPDATE = " + mopa.getStok());
-//            System.out.println("ID UPDATE = " + mopa.getStatus());
-//            System.out.println("ID UPDATE = " + mopa.getId());
 
             st.executeUpdate();
             

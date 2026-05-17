@@ -5,6 +5,7 @@
 package service;
 
 import java.util.List;
+import model.ModelDetailTransaksi;
 import model.ModelTransaksi;
 
 /**
@@ -13,11 +14,11 @@ import model.ModelTransaksi;
  */
 public interface ServiceTransaksi {
 
-    void addData(ModelTransaksi motran);
+    void addData(ModelTransaksi motran, ModelDetailTransaksi modetran);
 
-    void UpdateData(ModelTransaksi motran);
+    void UpdateData(ModelTransaksi motran, ModelDetailTransaksi modetran);
 
-    void DeleteData(ModelTransaksi motran);
+    void DeleteData(ModelTransaksi motran,ModelDetailTransaksi modetran);
 
     ModelTransaksi getById(String id);
 

@@ -4,33 +4,33 @@
  */
 package view.datatabel;
 
-import dao.DAOProduk;
+import dao.DAOLogin;
 import java.awt.Color;
 import java.util.List;
-import service.ServiceProduk;
-import tabelmodel.TableModProduk;
-import model.ModelProduk;
+import service.ServiceLogin;
+import tabelmodel.TableModKasir;
+import model.ModelLogin;
 
 /**
  *
  * @author fuadm
  */
-public class DataProduk extends javax.swing.JDialog {
+public class DataKasir extends javax.swing.JDialog {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DataProduk.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DataKasir.class.getName());
 
     int xx, xy;
-    private ServiceProduk servis = new DAOProduk();
-    private TableModProduk tblModel = new TableModProduk();
-    public ModelProduk mopa = new ModelProduk();
+    private ServiceLogin servis = new DAOLogin();
+    private TableModKasir tblModel = new TableModKasir();
+    public ModelLogin mola = new ModelLogin();
 
-    public DataProduk(java.awt.Frame parent, boolean modal) {
+    public DataKasir(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         setUndecorated(true);
         initComponents();
 
         setBackground(new Color(0, 0, 0, 0));
-        tblKategori.setModel(tblModel);
+        tblKasir.setModel(tblModel);
         searchBtn.requestFocus();
         loadData();
         setLocationRelativeTo(null);
@@ -49,7 +49,7 @@ public class DataProduk extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblKategori = new custom.TableCustom();
+        tblKasir = new custom.TableCustom();
         searchBtn = new javax.swing.JButton();
         inputSearch = new javax.swing.JTextField();
 
@@ -71,7 +71,7 @@ public class DataProduk extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Data Jenis Produk");
+        jLabel1.setText("Data Jenis Kasir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,7 +90,7 @@ public class DataProduk extends javax.swing.JDialog {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        tblKategori.setModel(new javax.swing.table.DefaultTableModel(
+        tblKasir.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -101,12 +101,12 @@ public class DataProduk extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblKategori.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblKasir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblKategoriMouseClicked(evt);
+                tblKasirMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblKategori);
+        jScrollPane1.setViewportView(tblKasir);
 
         searchBtn.setBackground(new java.awt.Color(237, 233, 230));
         searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-search-folder-35.png"))); // NOI18N
@@ -178,9 +178,9 @@ public class DataProduk extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchBtnActionPerformed
 
-    private void tblKategoriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKategoriMouseClicked
+    private void tblKasirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKasirMouseClicked
         pilihData();
-    }//GEN-LAST:event_tblKategoriMouseClicked
+    }//GEN-LAST:event_tblKasirMouseClicked
 
     private void inputSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputSearchMouseClicked
         inputSearch.setText("");
@@ -226,7 +226,7 @@ public class DataProduk extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                DataProduk dialog = new DataProduk(new javax.swing.JFrame(), true);
+                DataKasir dialog = new DataKasir(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -245,25 +245,24 @@ public class DataProduk extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton searchBtn;
-    private custom.TableCustom tblKategori;
+    private custom.TableCustom tblKasir;
     // End of variables declaration//GEN-END:variables
 
     private void pencarian() {
-        List<ModelProduk> list = servis.search(inputSearch.getText());
+        List<ModelLogin> list = servis.search(inputSearch.getText());
         tblModel.setData(list);
     }
 
     private void loadData() {
-        List<ModelProduk> list = servis.getData();
+        List<ModelLogin> list = servis.getData();
         tblModel.setData(list);
     }
 
     private void pilihData() {
-        int row = tblKategori.getSelectedRow();
+        int row = tblKasir.getSelectedRow();
 
-        mopa.setId(tblKategori.getModel().getValueAt(row, 1).toString());
-        mopa.setNamaMenu(tblKategori.getModel().getValueAt(row, 2).toString());
-        mopa.setHarga(Long.valueOf(tblKategori.getModel().getValueAt(row, 5).toString()));
+        mola.setId(tblKasir.getModel().getValueAt(row, 1).toString());
+        mola.setNama(tblKasir.getModel().getValueAt(row, 2).toString());
         dispose();
     }
 }

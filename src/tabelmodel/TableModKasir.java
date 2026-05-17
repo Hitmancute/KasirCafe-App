@@ -8,24 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
-import model.ModelPelanggan;
+import model.ModelLogin;
 
 /**
  *
  * @author fuadm
  */
-public class TableModPelanggan extends AbstractTableModel {
+public class TableModKasir extends AbstractTableModel {
 
-    private List<ModelPelanggan> list = new ArrayList<>();
+    private List<ModelLogin> list = new ArrayList<>();
 
-    public void addData(ModelPelanggan mopel) {
-        list.add(mopel);
+    public void addData(ModelLogin mola) {
+        list.add(mola);
         fireTableRowsInserted(list.size() - 1, list.size() - 1);
         JOptionPane.showMessageDialog(null, "Data berhasil ditambah");
     }
 
-    public void UpdateData(int row, ModelPelanggan mopel) {
-        list.add(row, mopel);
+    public void UpdateData(int row, ModelLogin mola) {
+        list.add(row, mola);
         fireTableDataChanged();
         JOptionPane.showMessageDialog(null, "Data berhasil diperbarui");
     }
@@ -41,18 +41,18 @@ public class TableModPelanggan extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void setData(List<ModelPelanggan> list) {
+    public void setData(List<ModelLogin> list) {
         clear();
         this.list.addAll(list);
         fireTableDataChanged();
     }
 
-    public void setData(int index, ModelPelanggan mopel) {
-        list.set(index, mopel);
+    public void setData(int index, ModelLogin moka) {
+        list.set(index, moka);
         fireTableRowsUpdated(index, index);
     }
 
-    public ModelPelanggan getData(int index) {
+    public ModelLogin getData(int index) {
         return list.get(index);
     }
 
@@ -61,7 +61,7 @@ public class TableModPelanggan extends AbstractTableModel {
         return list.size();
     }
 
-    private final String[] columNames = {"No", "ID Pelanggan","Nama Pelanggan" ,"Nomer Telepon"};
+    private final String[] columNames = {"No", "ID Kasir", "Nama", "Username", "Role"};
 
     @Override
     public int getColumnCount() {
@@ -79,7 +79,9 @@ public class TableModPelanggan extends AbstractTableModel {
                 case 1:
                     return list.get(rowIndex).getNama();
                 case 2:
-                    return list.get(rowIndex).getNoHp();
+                    return list.get(rowIndex).getUsername();
+                case 3:
+                    return list.get(rowIndex).getRole();
                 default:
                     return null;
             }

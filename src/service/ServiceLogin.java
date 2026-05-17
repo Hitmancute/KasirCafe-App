@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.util.List;
 import model.ModelLogin;
 
 /**
@@ -13,5 +14,9 @@ import model.ModelLogin;
 public interface ServiceLogin {
 
     void prossLogin(ModelLogin molo);
+
+    List<ModelLogin> search(String id);
+
+    List<ModelLogin> getData();
 
 }

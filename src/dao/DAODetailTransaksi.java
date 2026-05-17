@@ -59,7 +59,7 @@ public class DAODetailTransaksi implements ServiceDetailTransaksi {
         List<ModelDetailTransaksi> detailTransaksis = new ArrayList<>();
 
         String sql = 
-        "SELECT dt.id, dt.id_menu, dt.id_transaksi, dt.jumlah, dt.subtotal "
+        "SELECT dt.id, dt.id_transaksi, dt.id_menu, mp.nama_menu, mp.harga, dt.jumlah, dt.subtotal "
         + "FROM detail_transaksi dt "
         + "INNER JOIN menu_produk mp "
         + "ON dt.id_menu = mp.id "
@@ -80,6 +80,8 @@ public class DAODetailTransaksi implements ServiceDetailTransaksi {
                 detailTransaksi.setId(rs.getString("id"));
                 transaksi.setId(rs.getString("id_transaksi"));
                 produk.setId(rs.getString("id_menu"));
+                produk.setNamaMenu(rs.getString("mp.nama_menu"));
+                produk.setHarga(rs.getLong("mp.harga"));
                 detailTransaksi.setJumlah(rs.getInt("jumlah"));
                 detailTransaksi.setSubtotal(rs.getLong("subtotal"));
                 
