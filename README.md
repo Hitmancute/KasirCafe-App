@@ -1,11 +1,14 @@
 # ☕ KasirCafe-App
 
-Aplikasi kasir cafe berbasis Java Swing dan MySQL untuk manajemen transaksi, produk. Tugas UPRAk untuk Pak Dwi, Tujuannya yaitu Untuk membuat sistem kasir cepat untuk mencatat produc dan keuangan
+Aplikasi kasir cafe berbasis Java Swing dan MySQL untuk manajemen transaksi, produk, dan stok barang.
+
+Project ini dibuat sebagai tugas Uprak untuk Pak Dwi dengan tujuan membantu proses pencatatan produk dan keuangan cafe agar lebih cepat dan efisien.
 
 ![Java](https://img.shields.io/badge/Java-17-orange)
 ![MySQL](https://img.shields.io/badge/MySQL-8-blue)
 ![Status](https://img.shields.io/badge/status-active-success)
 
+---
 
 ## ✨ Features
 
@@ -16,6 +19,8 @@ Aplikasi kasir cafe berbasis Java Swing dan MySQL untuk manajemen transaksi, pro
 - Pencarian produk
 - Manajemen stok
 
+---
+
 ## 🛠 Tech Stack
 
 - Java Swing
@@ -23,7 +28,11 @@ Aplikasi kasir cafe berbasis Java Swing dan MySQL untuk manajemen transaksi, pro
 - JDBC
 - NetBeans
 
-- ## Database
+---
+
+## 🧠 Database Design
+
+Table yang digunakan:
 
 - users
 - transaksi
@@ -31,23 +40,31 @@ Aplikasi kasir cafe berbasis Java Swing dan MySQL untuk manajemen transaksi, pro
 - menu_produk
 - kategori
 
+---
+
 ## ⚙ Installation
 
 1. Clone repository
 
 ```bash
 git clone https://github.com/username/KasirCafe-App.git
+```
 
+2. Import database ke MySQL
+
+```sql
+kasircafe.sql
+```
+
+3. Open project menggunakan NetBeans
+
+4. Run project
 
 ---
 
-# 7. Folder Structure
-
-Developer suka bagian ini.
-
-```md
 ## 🗂 Folder Structure
 
+```bash
 src/
 ├── config/
 ├── model/
@@ -55,3 +72,21 @@ src/
 ├── view/
 ├── custom/
 └── main/
+```
+
+---
+
+## 📸 Preview
+
+Tambahkan screenshot aplikasi di sini.
+
+```md
+![Dashboard](assets/dashboard.png)
+![Transaksi](assets/transaksi.png)
+```
+
+---
+
+## 📄 License
+
+Project ini dibuat untuk keperluan pembelajaran dan tugas sekolah.
