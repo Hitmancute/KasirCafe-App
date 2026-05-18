@@ -232,7 +232,7 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         MenuItem menuMaster = new MenuItem(iconMaster, false, null, "Master", null, product, category, pelanggan);
-        MenuItem menuTransaksi = new MenuItem(iconSecond, false, null, "Transaksi", null, transaksi, transaksiDetail);
+        MenuItem menuTransaksi = new MenuItem(iconSecond, false, null, "Transaksi", null, transaksi);
 
         addMenu(menuHome, menuMaster, menuTransaksi);
     }
