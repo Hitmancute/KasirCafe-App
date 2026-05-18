@@ -85,9 +85,7 @@ Tambahkan screenshot aplikasi di sini.
 ![Login](assets/login.png)
 
 ![Dashboard](assets/dashboard.png)
-```md
-![Transaksi](assets/transaksi.png)
-```
+
 ---
 
 ## 📄 License
