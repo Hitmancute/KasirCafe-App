@@ -90,4 +90,4 @@ Tambahkan screenshot aplikasi di sini.
 
 ## 📄 License
 
-Project ini dibuat untuk keperluan pembelajaran dan tugas sekolah.
+Project ini dibuat untuk keperluan pembelajaran dan tugas sekolah keren.
