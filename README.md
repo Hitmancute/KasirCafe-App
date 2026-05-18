@@ -16,8 +16,6 @@ Project ini dibuat sebagai tugas Uprak untuk Pak Dwi dengan tujuan membantu pros
 - CRUD produk
 - CRUD kategori
 - Sistem transaksi kasir
-- Pencarian produk
-- Manajemen stok
 
 ---
 
@@ -35,6 +33,14 @@ Project ini dibuat sebagai tugas Uprak untuk Pak Dwi dengan tujuan membantu pros
 Database Relasi screenshot:
 
 ![DataBase](assets/Database.png)
+
+---
+
+## 📖 Java Sistem Design
+
+Arsiktekture Java Sistem Relasi screenshot:
+
+![RoadMap](assets/roadmap.png)
 
 ---
 
