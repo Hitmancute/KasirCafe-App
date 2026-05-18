@@ -59,7 +59,14 @@ public class DAOPelanggan implements ServicePelanggan {
 
     @Override
     public void DeleteData(ModelPelanggan mopel) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM pelanggan WHERE id =?";
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            st.setString(1, mopel.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

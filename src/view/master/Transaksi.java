@@ -871,5 +871,6 @@ public class Transaksi extends javax.swing.JPanel {
             loadData();
             resetForm();
         }
+        panelDetail.setVisible(false);
     }
 }
