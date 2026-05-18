@@ -40,7 +40,7 @@ public class Transaksi extends javax.swing.JPanel {
         lbId.setText(id);
         tblTransaksi.setModel(tblModelTran);
         tblDetail.setModel(tblModelDetTran);
-        inputId.setVisible(false);
+        inputId.setVisible(true);
         loadData();
         panelDetail.setVisible(false);
     }
@@ -96,6 +96,7 @@ public class Transaksi extends javax.swing.JPanel {
         inputNamaMenu = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         inputBayar = new javax.swing.JTextField();
+        inputId1 = new javax.swing.JTextField();
 
         setLayout(new java.awt.CardLayout());
 
@@ -459,6 +460,8 @@ public class Transaksi extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tambahTransaksiLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inputId1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(inputId, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(160, 160, 160))
                     .addGroup(tambahTransaksiLayout.createSequentialGroup()
@@ -477,7 +480,8 @@ public class Transaksi extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(tambahTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(inputId, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                    .addComponent(inputId, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(inputId1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(10, 10, 10)
                 .addGroup(tambahTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -533,7 +537,11 @@ public class Transaksi extends javax.swing.JPanel {
     }//GEN-LAST:event_tblTransaksiMouseClicked
 
     private void tblDetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailMouseClicked
-        // TODO add your handling code here:
+        if (addBtn.getText().equals("TAMBAH")) {
+            addBtn.setText("UBAH");
+        }
+        deleteBtn.setVisible(true);
+        CancelBtn.setVisible(true);
     }//GEN-LAST:event_tblDetailMouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -601,6 +609,7 @@ public class Transaksi extends javax.swing.JPanel {
     private javax.swing.JTextField inputBayar;
     private javax.swing.JTextField inputHarga;
     private javax.swing.JTextField inputId;
+    private javax.swing.JTextField inputId1;
     private javax.swing.JTextField inputJumlah;
     private javax.swing.JTextField inputNamaKasir;
     private javax.swing.JTextField inputNamaMenu;
@@ -696,43 +705,66 @@ public class Transaksi extends javax.swing.JPanel {
         }
     }
 
-//    private void perbaruhiData() {
-//        int index = tblTransaksi.getSelectedRow();
-//        if (index != -1) {
-//            ModelProduk mopa = tblModel.getData(tblTransaksi.convertRowIndexToModel(index));
-//
-//            if (validasiInput() == true) {
-//                String jenisKategori = inputidKasir.getText();
-//                String jenisKategoriNama = inputNamaKasir.getText();
-//
-//                String namaMenu = inputNamaMenu.getText();
-//                Long namaHarga = Long.parseLong(inputHarga.getText());
-//                int namaStok = Integer.parseInt(inputJumlah.getText());
-//                String namaStatus = cmStatus.getSelectedItem().toString();
-//                String idMenu = inputId.getText();
-//
-//                ModelProduk mopa1 = new ModelProduk();
-//                ModelKategory moka = new ModelKategory();
-//
-//                moka.setId(jenisKategori);
-//                moka.setNamakategori(jenisKategoriNama);
-//
-//                mopa1.setId(idMenu);
-//                mopa1.setIdKategori(moka);
-//                mopa1.setNamaMenu(namaMenu);
-//                mopa1.setHarga(namaHarga);
-//                mopa1.setStok(namaStok);
-//                mopa1.setStatus(namaStatus);
-//
-//                servis.UpdateData(mopa1);
-//                tblModel.UpdateData(index, mopa1);
-//                loadData();
-//                resetForm();
-//                tampilPanel();
-//                saveBtn.setText("TAMBAH");
-//            }
-//        }
-//    }
+    private void perbaruhiData() {
+        int index = tblTransaksi.getSelectedRow();
+        if (index != -1) {
+            ModelTransaksi motran1 = tblModelTran.getData(tblTransaksi.convertRowIndexToModel(index));
+            ModelDetailTransaksi modetran1 = tblModelDetTran.getData(tblTransaksi.convertRowIndexToModel(index));
+
+            if (validasiInput() == true) {
+                String idTransaksi = inputId.getText();
+                String idKasir = inputidKasir.getText();
+                String idPelanggan = inputidKasir.getText();
+                String idMenu = inputidMenu.getText();
+                String namaKasir = inputNamaKasir.getText();
+                String namaPelanggan = inputNamaPelanggan.getText();
+                String namaMenu = inputNamaMenu.getText();
+                Long Harga = Long.parseLong(inputHarga.getText());
+                int jumlah = Integer.parseInt(inputJumlah.getText());
+                Long Bayar = Long.parseLong(inputBayar.getText());
+
+                Long totalHarga = Harga * jumlah;
+                Long kembalian = totalHarga - Bayar;
+                Long subtotal = Harga * jumlah;
+
+                ModelProduk mopa = new ModelProduk();
+                ModelPelanggan mopel = new ModelPelanggan();
+                ModelLogin mola = new ModelLogin();
+                ModelTransaksi motran = new ModelTransaksi();
+                ModelDetailTransaksi modetran = new ModelDetailTransaksi();
+                
+                mola.setId(idKasir);
+                mopa.setId(idMenu);
+                mopel.setId(idPelanggan);
+
+                mola.setNama(namaKasir);
+                mopel.setNama(namaPelanggan);
+                mopa.setNamaMenu(namaMenu);
+
+                mopa.setHarga(Harga);
+                
+                motran.setId(idTransaksi);
+                motran.setIdKasir(mola);
+                motran.setIdPelanggan(mopel);
+                motran.setTotalHarga(totalHarga);
+                motran.setBayar(Bayar);
+                motran.setKembalian(kembalian);
+                
+                modetran.setIdProduk(mopa);
+                modetran.setJumlah(jumlah);
+                modetran.setSubtotal(subtotal);
+
+                servisTran.UpdateData(motran, modetran);
+                tblModelTran.UpdateData(index, motran);
+                tblModelDetTran.UpdateData(index, modetran);
+                loadData();
+                resetForm();
+                tampilPanel();
+                saveBtn.setText("TAMBAH");
+            }
+        }
+    }
+
     private boolean validasiInput() {
         boolean valid = false;
         if (inputidKasir.getText().trim().isEmpty()) {
@@ -785,12 +817,18 @@ public class Transaksi extends javax.swing.JPanel {
         int row = tblTransaksi.getSelectedRow();
         jLabel2.setText("Perbaruhi Data Produk");
 
-        inputId.setText(tblTransaksi.getModel().getValueAt(row, 1).toString());
-        inputidKasir.setText(tblTransaksi.getModel().getValueAt(row, 2).toString());
+        inputId.setText(tblTransaksi.getModel().getValueAt(row, 0).toString());
+        inputidKasir.setText(tblTransaksi.getModel().getValueAt(row, 1).toString());
+        inputidPelanggan.setText(tblTransaksi.getModel().getValueAt(row, 2).toString());
         inputNamaKasir.setText(tblTransaksi.getModel().getValueAt(row, 3).toString());
-        inputNamaMenu.setText(tblTransaksi.getModel().getValueAt(row, 4).toString());
-        inputHarga.setText(tblTransaksi.getModel().getValueAt(row, 5).toString());
-        inputJumlah.setText(tblTransaksi.getModel().getValueAt(row, 6).toString());
+        inputNamaPelanggan.setText(tblTransaksi.getModel().getValueAt(row, 4).toString());
+        inputHarga.setText(tblTransaksi.getModel().getValueAt(row, 6).toString());
+        inputBayar.setText(tblTransaksi.getModel().getValueAt(row, 7).toString());
+        inputJumlah.setText(tblDetail.getModel().getValueAt(row, 5).toString());
+
+        inputidMenu.setText(tblDetail.getModel().getValueAt(row, 2).toString());
+        inputNamaMenu.setText(tblDetail.getModel().getValueAt(row, 3).toString());
+
         aktif();
         saveBtn.setText("PERBARUI");
         cancelBtn.setVisible(true);
@@ -806,6 +844,7 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void hapusData() {
         int index = tblTransaksi.getSelectedRow();
+        int index1 = tblDetail.getSelectedRow();
 
         if (index == -1) {
             JOptionPane.showMessageDialog(null, "Pilih data yang akan dihapus");
@@ -813,8 +852,10 @@ public class Transaksi extends javax.swing.JPanel {
         }
 
         int modelRow = tblTransaksi.convertRowIndexToModel(index);
+        int modelRow1 = tblDetail.convertRowIndexToModel(index);
 
         ModelTransaksi motra = tblModelTran.getData(modelRow);
+        ModelDetailTransaksi modetran = tblModelDetTran.getData(modelRow1);
 
         int confirm = JOptionPane.showConfirmDialog(
                 null,
@@ -824,8 +865,9 @@ public class Transaksi extends javax.swing.JPanel {
         );
 
         if (confirm == JOptionPane.OK_OPTION) {
-            servisTran.DeleteData(motra);
+            servisTran.DeleteData(motra, modetran);
             tblModelTran.DeleteData(index);
+            tblModelDetTran.DeleteData(index1);
             loadData();
             resetForm();
         }

@@ -47,13 +47,13 @@ public class DAOTransaksi implements ServiceTransaksi {
 
             conn.setAutoCommit(false);
 
-            PreparedStatement stTransaksi = conn.prepareStatement(sqlTransaksi,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stTransaksi = conn.prepareStatement(sqlTransaksi, Statement.RETURN_GENERATED_KEYS);
 
-            stTransaksi.setString(1,motran.getIdKasir().getId());
-            stTransaksi.setString(2,motran.getIdPelanggan().getId());
-            stTransaksi.setLong(3,motran.getTotalHarga());
-            stTransaksi.setLong(4,motran.getBayar());
-            stTransaksi.setLong(5,motran.getKembalian());
+            stTransaksi.setString(1, motran.getIdKasir().getId());
+            stTransaksi.setString(2, motran.getIdPelanggan().getId());
+            stTransaksi.setLong(3, motran.getTotalHarga());
+            stTransaksi.setLong(4, motran.getBayar());
+            stTransaksi.setLong(5, motran.getKembalian());
 
             int result = stTransaksi.executeUpdate();
 
@@ -74,9 +74,9 @@ public class DAOTransaksi implements ServiceTransaksi {
             PreparedStatement stDetail = conn.prepareStatement(sqlDetail);
 
             stDetail.setInt(1, transaksiId);
-            stDetail.setString(2,modetran.getIdProduk().getId());
-            stDetail.setInt(3,modetran.getJumlah());
-            stDetail.setLong(4,modetran.getSubtotal());
+            stDetail.setString(2, modetran.getIdProduk().getId());
+            stDetail.setInt(3, modetran.getJumlah());
+            stDetail.setLong(4, modetran.getSubtotal());
 
             stDetail.executeUpdate();
 
@@ -116,32 +116,32 @@ public class DAOTransaksi implements ServiceTransaksi {
             conn.setAutoCommit(false);
             PreparedStatement stTransaksi = conn.prepareStatement(sqlTransaksi);
 
-            stTransaksi.setString(1,motran.getIdKasir().getId());
+            stTransaksi.setString(1, motran.getIdKasir().getId());
 
             if (motran.getIdPelanggan() == null) {
                 stTransaksi.setNull(2, Types.INTEGER);
             } else {
-                stTransaksi.setString(2,motran.getIdPelanggan().getId());
+                stTransaksi.setString(2, motran.getIdPelanggan().getId());
             }
-            stTransaksi.setLong(3,motran.getTotalHarga());
-            stTransaksi.setLong(4,motran.getBayar());
-            stTransaksi.setLong(5,motran.getKembalian());
-            stTransaksi.setString(6,motran.getId());
+            stTransaksi.setLong(3, motran.getTotalHarga());
+            stTransaksi.setLong(4, motran.getBayar());
+            stTransaksi.setLong(5, motran.getKembalian());
+            stTransaksi.setString(6, motran.getId());
 
             stTransaksi.executeUpdate();
 
             PreparedStatement stDelete = conn.prepareStatement(sqlDeleteDetail);
 
-            stDelete.setString(1,motran.getId());
+            stDelete.setString(1, motran.getId());
 
             stDelete.executeUpdate();
 
             PreparedStatement stInsert = conn.prepareStatement(sqlInsertDetail);
 
-            stInsert.setString(1,motran.getId());
-            stInsert.setString(2,modetran.getIdProduk().getId());
-            stInsert.setInt(3,modetran.getJumlah());
-            stInsert.setLong(4,modetran.getSubtotal());
+            stInsert.setString(1, motran.getId());
+            stInsert.setString(2, modetran.getIdProduk().getId());
+            stInsert.setInt(3, modetran.getJumlah());
+            stInsert.setLong(4, modetran.getSubtotal());
 
             stInsert.executeUpdate();
 
@@ -163,7 +163,22 @@ public class DAOTransaksi implements ServiceTransaksi {
 
     @Override
     public void DeleteData(ModelTransaksi motran, ModelDetailTransaksi modetran) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "DELETE FROM transaksi WHERE id =?";
+        String sql1 = "DELETE FROM detail_transaksi WHERE id =?";
+        try {
+            conn.setAutoCommit(false);
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, motran.getId());
+            st.executeUpdate();
+
+            PreparedStatement st1 = conn.prepareStatement(sql1);
+            st1.setString(1, modetran.getId());
+            st1.executeUpdate();
+
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -197,7 +212,7 @@ public class DAOTransaksi implements ServiceTransaksi {
                 user.setId(rs.getString("id_kasir"));
 
                 pelanggan.setId(rs.getString("id_pelanggan"));
-                
+
                 user.setNama(rs.getString("kasir.nama"));
                 pelanggan.setNama(rs.getString("pelanggan.nama"));
 
